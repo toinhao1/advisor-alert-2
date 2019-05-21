@@ -4,14 +4,19 @@ const Schema = mongoose.Schema;
 const AlertSchema = new Schema({
   client: {
     type: Schema.Types.ObjectId,
+    required: true,
     ref: 'clients'
   },
   stock: {
     type: String,
     required: true
   },
-  price: {
-    type: Number,
+  currentPrice: {
+    type: String,
+    required: true
+  },
+  alertPrice: {
+    type: String,
     required: true
   },
   date: {

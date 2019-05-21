@@ -5,13 +5,17 @@ module.exports = function validateLoginInput(data) {
   let errors = {};
 
   data.stock = !isEmpty(data.stock) ? data.stock : '';
-  data.price = !isEmpty(data.price) ? data.price : '';
+  data.currentPrice = !isEmpty(data.currentPrice) ? data.currentPrice : '';
+  data.alertPrice = !isEmpty(data.alertPrice) ? data.alertPrice : '';
 
   if (Validator.isEmpty(data.stock)) {
     errors.stock = 'Stock field is required';
   }
-  if (Validator.isEmpty(data.price) || data.price !== Number) {
-    errors.price = 'Price field is required';
+  if (Validator.isEmpty(data.currentPrice)) {
+    errors.currentPrice = 'Price field is required';
+  }
+  if (Validator.isEmpty(data.alertPrice)) {
+    errors.alertPrice = 'Price field is required';
   }
 
   return {

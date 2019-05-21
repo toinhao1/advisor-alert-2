@@ -108,8 +108,8 @@ router.get(
   }
 );
 
-// @route  DELETE api/profile
-// @desc   Delete user and profile
+// @route  DELETE api/users
+// @desc   Delete user
 // @access Private route
 router.delete(
   '/',
