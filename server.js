@@ -5,6 +5,7 @@ const passport = require('passport');
 const path = require('path');
 const users = require('./src/routes/users');
 const clients = require('./src/routes/clients');
+const alerts = require('./src/routes/alerts');
 
 const app = express();
 
@@ -35,6 +36,7 @@ require('./config/passport.js')(passport);
 // Use Routes
 app.use('/users', users);
 app.use('/clients', clients);
+app.use('/alerts', alerts);
 
 // Set port and have server listen
 const port = process.env.PORT;

@@ -12,11 +12,11 @@ const AlertSchema = new Schema({
     required: true
   },
   currentPrice: {
-    type: String,
+    type: Number,
     required: true
   },
   alertPrice: {
-    type: String,
+    type: Number,
     required: true
   },
   date: {
