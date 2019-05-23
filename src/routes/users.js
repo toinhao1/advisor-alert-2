@@ -93,14 +93,14 @@ router.post('/login', (req, res) => {
   });
 });
 
-// @route  GET api/users/current
+// @route  GET /users/current
 // @desc   Return current user
 // @access Private
 router.get(
   '/current',
   passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.json({
+  async (req, res) => {
+    await res.json({
       id: req.user.id,
       name: req.user.name,
       email: req.user.email
@@ -108,17 +108,22 @@ router.get(
   }
 );
 
-// @route  DELETE api/users
+// @route  DELETE /users
 // @desc   Delete user
 // @access Private route
 router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    User.findOneAndRemove({ _id: req.user.id }).then(() => {
+  async (req, res) => {
+    try {
+      await User.findOneAndRemove({ _id: req.user.id });
+
       sendCancelEmail(req.user.email, req.user.name);
+
       res.json({ success: true });
-    });
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
 );
 
