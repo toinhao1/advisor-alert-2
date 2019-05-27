@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { sendCancelEmail, sendWelcomeEmail } = require('../emails/account');
+const keys = require('../../config/keys');
 
 const User = require('../db/models/User');
 
@@ -76,7 +77,7 @@ router.post('/login', (req, res) => {
         // Sign Token
         jwt.sign(
           payload,
-          process.env.JWT_SECRET,
+          keys.JWT_SECRET,
           { expiresIn: 3600 },
           (err, token) => {
             res.json({

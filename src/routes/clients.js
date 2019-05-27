@@ -37,21 +37,21 @@ router.post(
 router.get(
   '/all',
   passport.authenticate('jwt', { session: false }),
-  async (req, res) => {
+  (req, res) => {
     const errors = {};
-    try {
-      const clients = await Client.find({ user: req.user.id }).populate(
-        'client',
-        ['name', 'identifier']
-      );
-      if (!clients) {
-        errors.noclient = 'There are no clients for this user';
-        return res.status(404).json(errors);
-      }
-      res.json(clients);
-    } catch (err) {
-      res.status(404).json(err);
-    }
+
+    Client.find({ user: req.user.id })
+      .populate('client', ['name', 'identifier'])
+      .then(clients => {
+        if (!clients) {
+          errors.noclient = 'There are no clients for this user';
+          return res.status(404).json(errors);
+        }
+        res.json(clients);
+      })
+      .catch(err => {
+        res.status(404).json(err);
+      });
   }
 );
 
