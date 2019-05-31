@@ -19,6 +19,8 @@ import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import Client from './components/clients/Client';
 import CreateClient from './components/clients/CreateClient';
+import Alert from './components/alerts/Alert';
+import CreateAlert from './components/alerts/CreateAlert';
 
 // Check for token
 if (localStorage.jwttoken) {
@@ -59,10 +61,20 @@ class App extends Component {
                 <PrivateRoute exact path="/clients/:id" component={Client} />
               </Switch>
               <Switch>
+                <PrivateRoute exact path="/alerts/:id" component={Alert} />
+              </Switch>
+              <Switch>
                 <PrivateRoute
                   exact
                   path="/create-client"
                   component={CreateClient}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/create-alert"
+                  component={CreateAlert}
                 />
               </Switch>
             </div>

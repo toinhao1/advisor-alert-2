@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
-import { createClient } from '../../actions/clientActions';
+import { createAlert } from '../../actions/alertActions';
 
-class CreateClient extends Component {
+class CreateAlert extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      identifier: '',
+      stock: '',
+      currentPrice: '',
+      alertPrice: '',
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -25,12 +26,14 @@ class CreateClient extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const clientData = {
-      name: this.state.name,
-      identifier: this.state.identifier
+    const alertData = {
+      stock: this.state.stock,
+      currentPrice: this.state.currentPrice,
+      alertPrice: this.state.alertPrice
     };
-    this.props.createClient(clientData);
-    this.props.history.push('/dashboard');
+    const { client } = this.props.client;
+    this.props.createAlert(client._id, alertData);
+    this.props.history.goBack();
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -44,27 +47,35 @@ class CreateClient extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create A Client</h1>
+              <h1 className="display-4 text-center">Create An Alert</h1>
               <p className="lead text-center">
-                Add a client so you can set alerts up for them.
+                Add an alert to track your clients holdings.
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="* Client Name"
-                  name="name"
-                  value={this.state.name}
+                  placeholder="* Stock"
+                  name="stock"
+                  value={this.state.stock}
                   onChange={this.onChange}
-                  error={errors.name}
-                  info="A name for your client."
+                  error={errors.stock}
+                  info="The stock ticker for this holding."
                 />
                 <TextFieldGroup
-                  placeholder="* Client Identifier"
-                  name="identifier"
-                  value={this.state.identifier}
+                  placeholder="* Current Price"
+                  name="currentPrice"
+                  value={this.state.currentPrice}
                   onChange={this.onChange}
-                  error={errors.identifier}
-                  info="Something unique about this client."
+                  error={errors.currentPrice}
+                  info="The current price of the holding."
+                />
+                <TextFieldGroup
+                  placeholder="* Alert Price"
+                  name="alertPrice"
+                  value={this.state.alertPrice}
+                  onChange={this.onChange}
+                  error={errors.alertPrice}
+                  info="What price would you like to be notified when the holding hits?."
                 />
                 <input
                   type="submit"
@@ -80,17 +91,20 @@ class CreateClient extends Component {
   }
 }
 
-CreateClient.propTypes = {
+CreateAlert.propTypes = {
+  alert: PropTypes.object.isRequired,
   client: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  createAlert: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
+  alert: state.alert,
   client: state.client,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { createClient }
-)(withRouter(CreateClient));
+  { createAlert }
+)(withRouter(CreateAlert));

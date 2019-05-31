@@ -58,7 +58,7 @@ export const logoutUser = () => dispatch => {
   dispatch(setCurrentUser({}));
 };
 
-// Delete Account and Profile
+// Delete Account
 export const deleteAccount = () => dispatch => {
   if (window.confirm('Are you sure this can not be undone!')) {
     axios

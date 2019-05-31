@@ -88,8 +88,9 @@ router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
+    const id = req.params.id;
     try {
-      await Client.findOneAndRemove({ _id: req.params.id, user: req.user._id });
+      await Client.findByIdAndDelete({ _id: id });
       res.json({ success: true });
     } catch (err) {
       res.status(404).json(err);

@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   alerts: [],
-  alert: {},
+  alert: [],
   loading: false
 };
 

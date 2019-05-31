@@ -80,11 +80,11 @@ router.get(
     const _id = req.params.id;
 
     try {
-      const alert = await Alert.find({ _id: _id }).populate('alert', [
-        'stock',
-        'currentPrice',
-        'alertPrice'
-      ]);
+      const alert = await Alert.find({ _id: _id }).populate('alert', {
+        stock: 'stock',
+        currentPrice: 'currentPrice',
+        alertPrice: 'alertPrice'
+      });
       if (!alert) {
         errors.noalert = 'That alert doesnt exist.';
         return res.status(404).json(errors);
@@ -107,7 +107,7 @@ router.get(
     const _id = req.params.id;
 
     try {
-      const allAlerts = await Alert.find({ client: _id }).populate('alert', [
+      const allAlerts = await Alert.find({ client: _id }).populate('alerts', [
         'stock',
         'currentPrice',
         'alertPrice'
