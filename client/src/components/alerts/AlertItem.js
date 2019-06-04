@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
+import { deleteAlert } from '../../actions/alertActions';
 
 class AlertItem extends Component {
+  onDeleteCLick(id) {
+    this.props.deleteAlert(id);
+  }
+
   render() {
     const { alert } = this.props;
 
@@ -13,9 +20,15 @@ class AlertItem extends Component {
             <h3>Stock {alert.stock}</h3>
             <p>Current Price {alert.currentPrice}</p>
             <p>Alert Price {alert.alertPrice}</p>
-            <Link to={`/alerts/${alert._id}`} className="btn btn-info">
-              View Alert
+            <Link to={`/update-alert/${alert._id}`} className="btn btn-info">
+              Edit Alert
             </Link>
+            <button
+              onClick={this.onDeleteCLick.bind(this, alert._id)}
+              className="btn btn-danger"
+            >
+              Delete Alert
+            </button>
           </div>
         </div>
       </div>
@@ -27,4 +40,7 @@ AlertItem.propTypes = {
   alert: PropTypes.object.isRequired
 };
 
-export default AlertItem;
+export default connect(
+  null,
+  { deleteAlert }
+)(AlertItem);

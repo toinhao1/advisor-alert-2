@@ -18,10 +18,6 @@ class Alert extends Component {
   render() {
     const { alert } = this.props.alert;
 
-    const upp = alert[0];
-
-    console.log(upp);
-
     let alertContent;
 
     if (alert === null || undefined) {

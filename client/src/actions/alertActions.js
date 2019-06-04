@@ -65,6 +65,24 @@ export const createAlert = (id, alertData) => dispatch => {
     );
 };
 
+//Update Alert
+export const updateAlert = (id, alertData) => dispatch => {
+  axios
+    .patch(`/alerts/${id}`, alertData)
+    .then(res =>
+      dispatch({
+        type: ADD_ALERT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Delete Alert
 export const deleteAlert = id => dispatch => {
   if (window.confirm('Are you sure this can not be undone!')) {
