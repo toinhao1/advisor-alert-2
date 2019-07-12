@@ -13,8 +13,6 @@ class CreateClient extends Component {
       identifier: '',
       errors: {}
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -22,19 +20,20 @@ class CreateClient extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     const clientData = {
       name: this.state.name,
       identifier: this.state.identifier
     };
+
     this.props.createClient(clientData);
-    this.props.history.push('/dashboard');
-  }
-  onChange(e) {
+  };
+
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
   render() {
     const { errors } = this.state;
@@ -46,7 +45,7 @@ class CreateClient extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Create A Client</h1>
               <p className="lead text-center">
-                Add a client so you can set alerts up for them.
+                Add a client so you can set up alerts for them.
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>

@@ -37,16 +37,13 @@ class Client extends Component {
         <div>
           <div className="row">
             <div className="col-md-6">
-              <h4>{client.name}</h4>
-              <p>{client.identifier}</p>
+              <h4>Client: {client.name}</h4>
+              <p>Identifier: {client.identifier}</p>
               {alertItems}
               <Link to="/dashboard" className="btn btn-light mb-3 float-left">
                 Back to all clients
               </Link>
-              <Link
-                to="/create-alert"
-                className="btn btn-light mb-3 float-left"
-              >
+              <Link to="/create-alert" className="btn btn-info mb-3 float-left">
                 Create A New Alert
               </Link>
               <button

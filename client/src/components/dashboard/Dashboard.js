@@ -31,7 +31,7 @@ class Dashboard extends Component {
             <p className="lead text-muted">Welcome {user.name}</p>
             <Clients />
             <div style={{ marginBottom: '60px' }} />
-            <Link to="/create-client" className="btn btn-lg btn-info">
+            <Link to="/create-client" className="btn btn-info">
               Create A Client
             </Link>
             <button
@@ -47,7 +47,7 @@ class Dashboard extends Component {
           <div>
             <p className="lead text-muted">Welcome {user.name}</p>
             <p>You have not added any of your clients yet.</p>
-            <Link to="/create-client" className="btn btn-lg btn-info">
+            <Link to="/create-client" className="btn btn-info">
               Create A Client
             </Link>
           </div>

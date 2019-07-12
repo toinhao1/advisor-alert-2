@@ -1,4 +1,6 @@
 import axios from 'axios';
+import history from '../utils/history';
+
 import {
   GET_ALERT,
   GET_ALERTS,
@@ -48,21 +50,19 @@ export const getAlerts = id => dispatch => {
 };
 
 //Create Alert
-export const createAlert = (id, alertData) => dispatch => {
-  axios
-    .post(`/alerts/${id}`, alertData)
-    .then(res =>
-      dispatch({
-        type: ADD_ALERT,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+export const createAlert = (id, alertData) => async dispatch => {
+  const res = await axios.post(`/alerts/${id}`, alertData);
+
+  dispatch({ type: ADD_ALERT, payload: res.data });
+
+  history.goBack();
+
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response.data
+  //   })
+  // );
 };
 
 //Update Alert
