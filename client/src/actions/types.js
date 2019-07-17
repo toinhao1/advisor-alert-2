@@ -11,3 +11,4 @@ export const ADD_CLIENT = 'ADD_CLIENT';
 export const DELETE_CLIENT = 'DELETE_CLIENT';
 export const CLIENT_LOADING = 'CLIENT_LOADING';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const UPDATE_ALERT = 'UPDATE_ALERT';

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { createAlert } from '../../actions/alertActions';
+import { searchBar } from '../../utils/data.api';
 
 class CreateAlert extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class CreateAlert extends Component {
   };
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+    searchBar(e.target.value);
   };
 
   render() {

@@ -7,6 +7,7 @@
     "classnames": "^2.2.6",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.1",
+    "intrinio-sdk": "^4.0.0",
     "jest-enzyme": "^7.0.2",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.6",
