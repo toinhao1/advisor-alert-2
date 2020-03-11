@@ -14,8 +14,6 @@ class CreateAlert extends Component {
       alertPrice: '',
       errors: {}
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,7 +22,7 @@ class CreateAlert extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const alertData = {
@@ -35,7 +33,7 @@ class CreateAlert extends Component {
     this.props.updateAlert(this.props.match.params.id, alertData);
     this.props.history.goBack();
   }
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 

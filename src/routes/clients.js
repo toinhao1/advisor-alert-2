@@ -7,7 +7,7 @@ const validateClientInput = require('../validation/clients');
 const Client = require('../db/models/Client');
 
 // @route POST /clients
-// @desc Create or edit a client
+// @desc Create a client
 // @access Private route
 router.post(
   '/',
@@ -55,7 +55,7 @@ router.get(
   }
 );
 
-// @route  GET /clients
+// @route  GET /clients/:id
 // @desc   Get select client
 // @access Private route
 router.get(

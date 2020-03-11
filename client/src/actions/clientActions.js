@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from '../utils/history';
 import {
   GET_CLIENT,
   GET_CLIENTS,
@@ -46,21 +47,21 @@ export const getClients = () => dispatch => {
 };
 
 //Create Client
-export const createClient = clientData => dispatch => {
-  axios
-    .post('/clients', clientData)
-    .then(res =>
-      dispatch({
-        type: ADD_CLIENT,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+export const createClient = clientData => async dispatch => {
+  const res = await axios.post('/clients', clientData);
+
+  dispatch({
+    type: ADD_CLIENT,
+    payload: res.data
+  });
+  history.goBack();
+
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response.data
+  //   })
+  // );
 };
 
 // Delete Client
