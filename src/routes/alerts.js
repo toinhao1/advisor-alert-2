@@ -80,7 +80,7 @@ router.get(
     const _id = req.params.id;
 
     try {
-      const alert = await Alert.find({ _id: _id }).populate('alert', {
+      const alert = await Alert.find({ _id }).populate('alert', {
         stock: 'stock',
         currentPrice: 'currentPrice',
         alertPrice: 'alertPrice'
