@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { GET_REALTIME_PRICE_DATA, GET_TICKER_DATA, START_PRICE_SEARCH, START_TICKER_SEARCH } from './types'
 
-
-
 export const startSearch = () => ({
   type: START_TICKER_SEARCH
 })
