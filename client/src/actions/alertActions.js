@@ -8,7 +8,8 @@ import {
   GET_ERRORS,
   ADD_ALERT,
   DELETE_ALERT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  UPDATE_ALERT,
 } from './types';
 
 // Get current alert
@@ -19,7 +20,7 @@ export const getCurrentAlert = id => dispatch => {
     .then(res =>
       dispatch({
         type: GET_ALERT,
-        payload: res.data
+        payload: res.data[0]
       })
     )
     .catch(err =>
@@ -71,7 +72,7 @@ export const updateAlert = (id, alertData) => dispatch => {
     .patch(`/alerts/${id}`, alertData)
     .then(res =>
       dispatch({
-        type: ADD_ALERT,
+        type: UPDATE_ALERT,
         payload: res.data
       })
     )

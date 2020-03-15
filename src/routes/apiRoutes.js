@@ -19,6 +19,7 @@ router.post('/search', async (req, res) => {
 
 // @route POST / get real time price of the ticker
 router.post('/prices', async (req, res) => {
+  console.log(req.body)
   try {
     const response = await axios({
       method: "get",

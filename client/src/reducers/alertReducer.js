@@ -3,16 +3,17 @@ import {
   GET_ALERTS,
   GET_ALERT,
   ALERT_LOADING,
-  DELETE_ALERT
+  DELETE_ALERT,
+  UPDATE_ALERT,
 } from '../actions/types';
 
 const initialState = {
   alerts: [],
-  alert: [],
+  alert: {},
   loading: false
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case ALERT_LOADING:
       return {
@@ -31,6 +32,14 @@ export default function(state = initialState, action) {
         alert: action.payload,
         loading: false
       };
+    case UPDATE_ALERT:
+      return {
+        ...state,
+        alerts: state.alerts.map(alert => (
+          alert.id === action.payload._id ? { ...alert, alertPrice: action.payload.alertPrice } : alert
+        )
+        )
+      }
     case ADD_ALERT:
       return {
         ...state,
