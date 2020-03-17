@@ -11,7 +11,6 @@ class UpdateAlert extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPrice: '',
       alertPrice: '',
       errors: {}
     };
@@ -23,13 +22,12 @@ class UpdateAlert extends Component {
 
   componentDidUpdate(oldProps) {
     const { alert, match } = this.props
-    console.log(match.params.id !== oldProps.alert._id, oldProps)
+
     if (match.params.id !== oldProps.alert._id) {
       this.props.getCurrentAlert(this.props.match.params.id)
       this.setState({
-        currentPrice: alert.currentPrice,
         alertPrice: alert.alertPrice
-      }, () => console.log(this.state))
+      })
     }
   }
 

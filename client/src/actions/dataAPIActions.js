@@ -27,7 +27,7 @@ export const getPriceData = (ticker) => async dispatch => {
 
     const res = await axios.post('/api/prices', ticker)
 
-    dispatch({ type: GET_REALTIME_PRICE_DATA, payload: res.data["Global Quote"]["05. price"].slice(0, -2) })
+    dispatch({ type: GET_REALTIME_PRICE_DATA, payload: res.data })
 
   }
 }

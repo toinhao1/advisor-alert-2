@@ -74,7 +74,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute
                   exact
-                  path="/create-alert"
+                  path="/create-alert/:id"
                   component={CreateAlert}
                 />
               </Switch>
