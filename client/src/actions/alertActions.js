@@ -20,7 +20,7 @@ export const getCurrentAlert = id => dispatch => {
     .then(res =>
       dispatch({
         type: GET_ALERT,
-        payload: res.data[0]
+        payload: res.data
       })
     )
     .catch(err =>

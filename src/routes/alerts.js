@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-
+const { sendNewAlertEmail } = require('../emails/alerts');
+const getPricesForTicker = require('../apiData/dataAPIFunctions')
 const validateAlertInput = require('../validation/alerts');
 
 // Load models
@@ -29,6 +30,7 @@ router.post(
       const alert = await new Alert({ ...req.body, client: clientId._id });
 
       await alert.save();
+      sendNewAlertEmail(req.user, alert)
       res.json(alert);
     } catch (err) {
       res.status(404).json({ err: err });
@@ -78,18 +80,25 @@ router.get(
   async (req, res) => {
     const errors = {};
     const _id = req.params.id;
-
     try {
-      const alert = await Alert.find({ _id }).populate('alert', {
-        stock: 'stock',
-        currentPrice: 'currentPrice',
-        alertPrice: 'alertPrice'
-      });
-      if (!alert) {
+      const alert = await Alert.findOne({ _id })
+
+      const updates = {
+        currentPrice: await getPricesForTicker(alert.stock)
+      };
+      let alertWithUpdatedPrice = await Alert.findOneAndUpdate(
+        { _id: _id },
+        { $set: updates },
+        { new: true }
+      );
+
+      await alertWithUpdatedPrice.save();
+
+      if (!alertWithUpdatedPrice) {
         errors.noalert = 'That alert doesnt exist.';
         return res.status(404).json(errors);
       }
-      res.json(alert);
+      res.json(alertWithUpdatedPrice);
     } catch (err) {
       res.status(404).json(err);
     }
@@ -112,7 +121,6 @@ router.get(
         'currentPrice',
         'alertPrice'
       ]);
-
       if (!allAlerts) {
         errors.noalerts = 'There are no alerts for this client';
         return res.status(404).json(errors);

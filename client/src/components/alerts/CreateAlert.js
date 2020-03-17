@@ -38,8 +38,7 @@ class CreateAlert extends Component {
       currentPrice: this.state.currentPrice,
       alertPrice: this.state.alertPrice
     };
-    const { client } = this.props.client;
-    this.props.createAlert(client._id, alertData);
+    this.props.createAlert(this.props.match.params.id, alertData);
   };
 
   onChange = e => {
@@ -83,8 +82,8 @@ class CreateAlert extends Component {
                   info="The stock ticker for this holding."
                 /> */}
                 <AsyncTypeahead
-                  id="primaryTopic"
-                  name="primaryTopic"
+                  id="typeAhead"
+                  name="stock"
                   placeholder="Pick a stock..."
                   onChange={this.handleTickerSelect}
                   onSearch={this.hanldeTickerSearch}
@@ -107,8 +106,9 @@ class CreateAlert extends Component {
                     )
                   }}
                 />
-                <div className="row" />
-                <div className="col">...</div>
+                <div className="row belowTypeAhead" >
+                  <div className="col" />
+                </div>
                 <TextFieldGroup
                   placeholder="Current Price"
                   name="currentPrice"

@@ -37,3 +37,17 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+
+.rbt {
+  height: 48px;
+}
+
+.form-control {
+  height: 48px;
+  font-size: 1.25rem;
+}
+
+.belowTypeAhead {
+  padding-bottom: 30px;
+}
